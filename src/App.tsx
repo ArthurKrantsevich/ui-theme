@@ -11,7 +11,7 @@ type Mode = "cheap" | "split" | "theme";
 type Focus = "all" | DeviceId;
 type View = { mode: Mode; dark: boolean; focus: Focus; lang: Lang; split: number; step: number; rec: string; marks: boolean };
 
-const VIDEO = "https://www.youtube.com/@NeuroP1lot";
+const VIDEO = "https://youtu.be/l7d37XAcLTc";
 const REPO = "https://github.com/ArthurKrantsevich/ui-theme";
 const PRESETS = ["#2F6BDE", "#F26B1D", "#0E9F6E", "#C2185B", "#F4C430", "#5B4BDB"];
 

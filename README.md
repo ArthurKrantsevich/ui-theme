@@ -1,6 +1,7 @@
 # ui-theme — Theme proof / Оттиск темы
 
 **Open the tool:** https://arthurkrantsevich.github.io/ui-theme/ · RU / EN · free, runs in the browser
+**Watch the video:** [Your UI looks cheap? 5 rules that fix it](https://youtu.be/l7d37XAcLTc) (RU audio + EN dub)
 
 One UI theme from **five rules** — spacing, type, color, depth, shape — checked on the same app on **phone, tablet, laptop and desktop at once**, in light and dark. Export it as CSS variables, a Tailwind v4 `@theme` block or JSON tokens.
 
@@ -67,6 +68,7 @@ Every scene can be opened from the URL, e.g. `?seed=F26B1D&mode=split&focus=lapt
 ## По-русски
 
 **Утилита:** https://arthurkrantsevich.github.io/ui-theme/
+**Видео:** [Интерфейс выглядит дёшево? 5 правил, которые это чинят](https://youtu.be/l7d37XAcLTc)
 
 Одна тема интерфейса из пяти правил: отступы, шрифт, цвет, глубина, форма. Её сразу видно на телефоне, планшете, ноутбуке и ПК, в светлом и тёмном варианте. Экспорт в CSS, Tailwind v4 и JSON. Утилиту сделали к видео «Интерфейс выглядит дёшево? 5 правил, которые это чинят». Сделано ИИ.
 
