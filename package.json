@@ -1,0 +1,25 @@
+{
+  "name": "ui-theme",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Одна тема интерфейса из пяти правил: отступы, шрифт, цвет, глубина, форма. Превью на телефоне, планшете, ноутбуке и ПК, экспорт в CSS, Tailwind и JSON.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite --port 5211 --strictPort",
+    "build": "tsc -p . && vite build"
+  },
+  "dependencies": {
+    "@fontsource/golos-text": "^5.1.0",
+    "@fontsource/jetbrains-mono": "^5.1.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "typescript": "5.7",
+    "vite": "^6.4.5"
+  }
+}

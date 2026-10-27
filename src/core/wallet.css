@@ -1,0 +1,197 @@
+/* «Кошелёк»: все отступы, размеры, цвета, тени и углы — только из переменных вида (--w-*).
+   Раскладка — по ширине контейнера: телефон <600, планшет 600–1199, ноутбук 1200–1599, ПК ≥1600 (классы окон Android). */
+
+.w {
+  container: wallet / inline-size;
+  height: 100%;
+  box-sizing: border-box;
+  background: var(--w-c-bg);
+  color: var(--w-c-text);
+  font-family: var(--w-font, "Golos Text"), system-ui, sans-serif;
+  font-size: var(--w-fs-body);
+  line-height: var(--w-lh);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+.w *, .w *::before, .w *::after { box-sizing: border-box; }
+.w button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+.w h1, .w h2, .w ul { margin: 0; padding: 0; }
+
+.w-app {
+  height: 100%;
+  display: grid;
+  grid-template: "safe" auto "main" 1fr "tab" auto / minmax(0, 1fr);
+}
+/* вырезы экрана: строка статуса сверху и полоска «домой» снизу — высотой, а не отступом */
+.w-safe-top { grid-area: safe; display: block; height: var(--w-safe-top, 0px); }
+.w-safe-bottom { display: block; flex-basis: 100%; height: var(--w-safe-bottom, 0px); }
+.w-ico { width: 22px; height: 22px; flex: none; display: block; }
+
+/* ---------- текст ---------- */
+.w-cap { font-size: var(--w-fs-cap); color: var(--w-c-muted); }
+.w-item { font-size: var(--w-fs-item); font-weight: 500; }
+.w-title { font-size: var(--w-fs-title); font-weight: 600; }
+.w-num, .w-month {
+  font-size: clamp(var(--w-fs-num), calc(var(--w-fs-num) + var(--w-num-k) * (100cqi - 393px)), var(--w-fs-numMax));
+  font-weight: 700; letter-spacing: -0.02em; line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- основное ---------- */
+.w-main { grid-area: main; min-height: 0; overflow: hidden; padding: var(--w-sp-page); display: flex; flex-direction: column; gap: var(--w-sp-sec); text-align: var(--w-align); }
+.w-head { display: flex; align-items: center; gap: var(--w-sp-chipX); }
+.w-head > div { flex: 1; }
+.w-avatar { width: 36px; height: 36px; border-radius: 50%; flex: none; background: linear-gradient(135deg, var(--w-c-chip), var(--w-c-primary)); }
+
+.w-grid { display: flex; flex-direction: column; gap: var(--w-sp-group); min-height: 0; }
+.w-goal { order: 4; }
+.w-grid > * { flex-shrink: 0; }
+
+/* карточка с суммой — самая важная, уровень 2 */
+.w-hero {
+  display: flex; flex-direction: column; gap: var(--w-sp-label);
+  padding: var(--w-sp-cardP);
+  background: var(--w-c-raised); border-radius: var(--w-r-hero); box-shadow: var(--w-sh-hero);
+  align-items: var(--w-items, stretch);
+}
+.w-hero .w-bar { margin-top: var(--w-sp-rowY); }
+.w-bar { height: 8px; border-radius: 999px; background: var(--w-c-track); overflow: hidden; }
+.w-bar i { display: block; height: 100%; border-radius: 999px; background: var(--w-c-primary); }
+
+.w-actions { display: flex; flex-direction: column; gap: var(--w-sp-chipGap); }
+.w-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--w-sp-chipGap);
+  padding: var(--w-sp-btnY) var(--w-sp-btnX);
+  font-size: var(--w-fs-btn) !important; font-weight: 600; line-height: var(--w-lh);
+  background: var(--w-c-primary) !important; color: var(--w-c-onPrimary) !important;
+  border-radius: var(--w-r-btn); box-shadow: var(--w-sh-btn);
+}
+.w-field {
+  display: flex; align-items: center; gap: var(--w-sp-chipGap);
+  padding: var(--w-sp-btnY) var(--w-sp-chipX);
+  background: var(--w-c-surface); color: var(--w-c-muted);
+  border-radius: var(--w-r-field); box-shadow: inset 0 0 0 1px var(--w-c-border);
+}
+.w-search-head { display: none; }
+
+.w-feed { display: flex; flex-direction: column; gap: var(--w-sp-rowY); min-height: 0; }
+.w-feed-title { margin-top: 0; }
+.w-chips { display: flex; gap: var(--w-sp-chipGap); flex-wrap: nowrap; overflow: hidden; }
+.w-chip {
+  flex: none; padding: var(--w-sp-chipY) var(--w-sp-chipX);
+  font-size: var(--w-fs-chip); font-weight: 500;
+  border-radius: var(--w-r-chip); background: var(--w-c-surface); color: var(--w-c-muted);
+  box-shadow: inset 0 0 0 1px var(--w-c-border);
+}
+.w-chip.on { background: var(--w-c-chip); color: var(--w-c-onChip); box-shadow: none; }
+
+/* список трат — карточка уровня 1 */
+.w-list {
+  list-style: none; padding: var(--w-sp-label) var(--w-sp-cardP2) !important;
+  background: var(--w-c-surface); border-radius: var(--w-r-card); box-shadow: var(--w-sh-card);
+}
+.w-row { display: flex; align-items: center; gap: var(--w-sp-rowGap); padding: var(--w-sp-rowY) 0; }
+.w-row + .w-row { box-shadow: 0 -1px 0 var(--w-c-border); }
+.w-row-ico {
+  width: 40px; height: 40px; flex: none; display: grid; place-items: center;
+  border-radius: var(--w-r-chip); background: var(--w-c-chip); color: var(--w-c-onChip);
+}
+.w-row-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.w-row-txt > * { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.w-sum { font-size: var(--w-fs-body); font-weight: 600; color: var(--w-c-expense); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.w-sum.inc { color: var(--w-c-income); }
+
+/* цель — карточка уровня 1; картинка внутри скруглена «внешний радиус минус отступ» */
+.w-goal {
+  display: flex; flex-direction: column; gap: var(--w-sp-rowY);
+  padding: var(--w-sp-cardP);
+  background: var(--w-c-surface); border-radius: var(--w-r-goal); box-shadow: var(--w-sh-goal);
+}
+.w-goal-img { height: 112px; border-radius: var(--w-r-img); overflow: hidden; }
+.w-art { width: 100%; height: 100%; display: block; filter: brightness(var(--w-dim, 1)); }
+.w-goal-body { display: flex; flex-direction: column; gap: var(--w-sp-label); }
+
+/* ---------- навигация ---------- */
+.w-tabbar {
+  grid-area: tab; display: flex; flex-wrap: wrap; justify-content: space-around;
+  padding: var(--w-sp-nav) var(--w-sp-page);
+  background: var(--w-c-surface); box-shadow: 0 -1px 0 var(--w-c-border);
+}
+.w-tabbar a { display: flex; flex-direction: column; align-items: center; gap: var(--w-sp-label); font-size: var(--w-fs-nav); color: var(--w-c-muted); min-width: 64px; }
+.w-pill { width: 56px; height: 30px; display: grid; place-items: center; border-radius: 999px; }
+.w-tabbar a.on { color: var(--w-c-text); font-weight: 600; }
+.w-tabbar a.on .w-pill { background: var(--w-c-chip); color: var(--w-c-onChip); }
+.w-side, .w-right { display: none; }
+
+/* ---------- планшет: две колонки ---------- */
+@container wallet (min-width: 600px) {
+  .w-main { padding: var(--w-sp-pageM); }
+  .w-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: auto auto 1fr; gap: var(--w-sp-group); }
+  .w-hero { grid-column: 1; grid-row: 1; }
+  .w-goal { grid-column: 1; grid-row: 2; }
+  .w-actions { grid-column: 2; grid-row: 1; }
+  .w-feed { grid-column: 2; grid-row: 2 / 4; }
+  .w-tabbar { padding-inline: var(--w-sp-pageM); }
+}
+
+/* ---------- ноутбук: боковое меню ---------- */
+@container wallet (min-width: 1200px) {
+  .w-app { grid-template: "safe safe" auto "side main" 1fr / 248px minmax(0, 1fr); }
+  .w-tabbar, .w-actions { display: none; }
+  .w-side {
+    grid-area: side; display: grid; grid-template-rows: auto 1fr auto; align-content: stretch; gap: var(--w-sp-group);
+    padding: var(--w-sp-pageL) var(--w-sp-cardP);
+    background: var(--w-c-surface); box-shadow: 1px 0 0 var(--w-c-border);
+  }
+  .w-logo { display: flex; align-items: center; gap: var(--w-sp-chipGap); font-size: var(--w-fs-title); font-weight: 700; }
+  .w-logo-mark { width: 28px; height: 28px; border-radius: var(--w-r-chip); background: var(--w-c-primary); }
+  .w-sidenav { display: flex; flex-direction: column; gap: var(--w-sp-label); }
+  .w-sidenav { align-content: start; }
+  .w-sidenav a { display: flex; align-items: center; gap: var(--w-sp-rowGap); padding: var(--w-sp-chipGap) var(--w-sp-chipX); border-radius: var(--w-r-btn); color: var(--w-c-muted); font-size: var(--w-fs-nav); }
+  .w-sidenav a.on { background: var(--w-c-chip); color: var(--w-c-onChip); font-weight: 600; }
+  .w-main { padding: var(--w-sp-pageL); }
+  .w-search-head { display: flex; width: 320px; }
+  .w-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-rows: auto 1fr; }
+  .w-hero { grid-column: 1; grid-row: 1; }
+  .w-goal { grid-column: 2; grid-row: 1; flex-direction: row; align-items: stretch; }
+  .w-goal-img { height: auto; width: 45%; flex: none; }
+  .w-goal-body { flex: 1; justify-content: center; }
+  .w-feed { grid-column: 1 / 3; grid-row: 2; }
+}
+
+/* ---------- ПК: ещё панель справа ---------- */
+@container wallet (min-width: 1600px) {
+  .w-app { grid-template: "safe safe safe" auto "side main right" 1fr / 264px minmax(0, 1fr) 360px; }
+  .w-right { grid-area: right; display: block; padding: var(--w-sp-pageL) var(--w-sp-pageL) var(--w-sp-pageL) 0; }
+  .w-cats {
+    display: flex; flex-direction: column; gap: var(--w-sp-sec);
+    padding: var(--w-sp-cardP); background: var(--w-c-surface);
+    border-radius: var(--w-r-card); box-shadow: var(--w-sh-card);
+  }
+  .w-cat { display: flex; flex-direction: column; gap: var(--w-sp-chipGap); }
+  .w-cat-top { display: flex; justify-content: space-between; }
+}
+
+/* наведение — только там, где есть курсор (на телефоне эффект «залипает» после касания) */
+/* карточка под курсором поднимается на уровень (в видео — класс hover, в браузере — :hover) */
+.w-row.hover { transform: translateY(-2px); background: var(--w-c-raised); box-shadow: var(--w-sh-hero); border-radius: var(--w-r-chip); }
+@media (hover: hover) {
+  .w-row { transition: transform .2s, box-shadow .2s; }
+  .w-btn { transition: box-shadow .2s, transform .2s; }
+  .w-btn:hover { transform: translateY(-1px); }
+}
+
+/* разметка поверх экрана (редлайны): числа из вида, пурпурный — «на глаз», голубой — по шкале */
+.w-hero, .w-goal, .w-list, .w-goal-img, .w-btn, .w-chip, .w-row, .w-month, .w-num, .w-feed-title, .w-cap, .w-item { position: relative; }
+.w-tag {
+  position: absolute; left: -6px; top: -10px; z-index: 5;
+  padding: 1px 5px; border-radius: 3px;
+  font: 600 12px/1.35 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0;
+  background: #00a3e0; color: #0b1a22; white-space: nowrap; pointer-events: none;
+  box-shadow: 0 0 0 1.5px #fff;
+}
+.w-tag.r { position: relative; left: auto; top: -0.6em; margin-left: 4px; display: inline-block; vertical-align: top; }
+.w-tag.l { left: -14px; top: -12px; }
+.w-tag.in { left: 6px; top: 6px; }
+.w-tag.bad { background: #e2007a; color: #fff; }
+.w-tag.good { background: #00a3e0; color: #0b1a22; }
